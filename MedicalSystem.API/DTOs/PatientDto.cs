@@ -30,5 +30,8 @@ namespace MedicalSystem.API.DTOs
 
         [StringLength(20, ErrorMessage = "Patient number cannot be longer than 20 characters")]
         public string PatientNumber { get; set; }
+
+        [StringLength(20, ErrorMessage = "Contact number cannot be longer than 20 characters")]
+        public string? ContactNumber { get; set; }
     }
 }

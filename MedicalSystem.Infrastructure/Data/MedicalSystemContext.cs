@@ -17,7 +17,6 @@ namespace MedicalSystem.Infrastructure.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<MedicalHistory> MedicalHistories { get; set; }
         public DbSet<ExaminationType> ExaminationTypes { get; set; }
-        public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Examination> Examinations { get; set; }
         public DbSet<MedicalImage> MedicalImages { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
@@ -25,6 +24,17 @@ namespace MedicalSystem.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ExaminationType>()
+                .Property(e => e.Description)
+                .IsRequired(false);
+
+            // Configure DateTime properties to use UTC
+            modelBuilder.Entity<Patient>()
+                .Property(p => p.DateOfBirth)
+                .HasConversion(
+                    v => v.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(v, DateTimeKind.Utc) : v.ToUniversalTime(),
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
             // Configure indexes and relationships
             modelBuilder.Entity<Patient>()

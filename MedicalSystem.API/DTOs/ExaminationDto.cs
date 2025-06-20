@@ -13,7 +13,6 @@ namespace MedicalSystem.API.DTOs
         [Required(ErrorMessage = "Examination type is required")]
         public int TypeId { get; set; }
 
-        public int? DoctorId { get; set; }
 
         [Required(ErrorMessage = "Examination date is required")]
         [DataType(DataType.Date)]

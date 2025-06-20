@@ -25,39 +25,6 @@ namespace MedicalSystem.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MedicalSystem.Core.Models.Doctor", b =>
-                {
-                    b.Property<int>("DoctorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DoctorId"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Specialization")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("DoctorId");
-
-                    b.ToTable("Doctors");
-                });
-
             modelBuilder.Entity("MedicalSystem.Core.Models.Examination", b =>
                 {
                     b.Property<int>("ExaminationId")
@@ -65,10 +32,6 @@ namespace MedicalSystem.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExaminationId"));
-
-                    b.Property<int?>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("ExaminationDate")
                         .HasColumnType("timestamp with time zone");
@@ -87,8 +50,6 @@ namespace MedicalSystem.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("ExaminationId");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -111,7 +72,6 @@ namespace MedicalSystem.Infrastructure.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -334,10 +294,6 @@ namespace MedicalSystem.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PrescriptionId"));
 
-                    b.Property<int?>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("integer");
-
                     b.Property<string>("Dosage")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -360,8 +316,6 @@ namespace MedicalSystem.Infrastructure.Migrations
 
                     b.HasKey("PrescriptionId");
 
-                    b.HasIndex("DoctorId");
-
                     b.HasIndex("PatientId");
 
                     b.ToTable("Prescriptions");
@@ -369,12 +323,6 @@ namespace MedicalSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("MedicalSystem.Core.Models.Examination", b =>
                 {
-                    b.HasOne("MedicalSystem.Core.Models.Doctor", "Doctor")
-                        .WithMany("Examinations")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MedicalSystem.Core.Models.Patient", "Patient")
                         .WithMany("Examinations")
                         .HasForeignKey("PatientId")
@@ -386,8 +334,6 @@ namespace MedicalSystem.Infrastructure.Migrations
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Doctor");
 
                     b.Navigation("ExaminationType");
 
@@ -418,28 +364,13 @@ namespace MedicalSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("MedicalSystem.Core.Models.Prescription", b =>
                 {
-                    b.HasOne("MedicalSystem.Core.Models.Doctor", "Doctor")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MedicalSystem.Core.Models.Patient", "Patient")
                         .WithMany("Prescriptions")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Doctor");
-
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("MedicalSystem.Core.Models.Doctor", b =>
-                {
-                    b.Navigation("Examinations");
-
-                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("MedicalSystem.Core.Models.Examination", b =>

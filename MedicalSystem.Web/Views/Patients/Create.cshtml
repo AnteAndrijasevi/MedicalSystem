@@ -1,0 +1,119 @@
+﻿@model MedicalSystem.API.DTOs.PatientDto
+
+@{
+    ViewData["Title"] = "Dodaj novog pacijenta";
+}
+
+<h2><i class="bi bi-person-plus"></i> Dodaj novog pacijenta</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="FirstName" class="form-label">Ime</label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="LastName" class="form-label">Prezime</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="OIB" class="form-label">OIB</label>
+                                <input asp-for="OIB" class="form-control" maxlength="11" />
+                                <span asp-validation-for="OIB" class="text-danger"></span>
+                                <div class="form-text">Unesite 11 znamenki OIB-a</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="DateOfBirth" class="form-label">Datum rođenja</label>
+                                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Gender" class="form-label">Spol</label>
+                                <select asp-for="Gender" class="form-select">
+                                    <option value="">-- Odaberite spol --</option>
+                                    <option value="M">Muški</option>
+                                    <option value="F">Ženski</option>
+                                    <option value="O">Ostalo</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="ContactNumber" class="form-label">Kontakt broj</label>
+                                <input asp-for="ContactNumber" class="form-control" />
+                                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                                <div class="form-text">Neobavezno</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="PatientNumber" class="form-label">
+                            Broj pacijenta <small class="text-muted">(neobavezno)</small>
+                        </label>
+                        <input asp-for="PatientNumber" class="form-control"
+                               placeholder="Automatski se generira ako ostavite prazno" />
+                        <span asp-validation-for="PatientNumber" class="text-danger"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i>
+                            Format: P-YYYY-XXX (npr. P-2000-001)
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-success me-2">
+                            <i class="bi bi-check-circle"></i> Spremi pacijenta
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Povratak na listu
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="bi bi-info-circle"></i> Napomene</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check text-success"></i> Ime i prezime su obavezni</li>
+                    <li><i class="bi bi-check text-success"></i> OIB mora imati točno 11 znamenki</li>
+                    <li><i class="bi bi-check text-success"></i> Datum rođenja je obavezan</li>
+                    <li><i class="bi bi-check text-success"></i> Spol je obavezan</li>
+                    <li><i class="bi bi-info text-info"></i> Broj pacijenta se automatski generira</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

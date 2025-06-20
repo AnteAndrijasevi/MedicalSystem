@@ -10,7 +10,6 @@ namespace MedicalSystem.API.DTOs
         [Required(ErrorMessage = "Patient ID is required")]
         public int PatientId { get; set; }
 
-        public int? DoctorId { get; set; }
 
         [Required(ErrorMessage = "Medication name is required")]
         [StringLength(200, ErrorMessage = "Medication name cannot be longer than 200 characters")]

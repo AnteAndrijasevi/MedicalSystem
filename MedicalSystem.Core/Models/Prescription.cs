@@ -11,8 +11,6 @@ namespace MedicalSystem.Core.Models
 
         public int PatientId { get; set; }
 
-        public int? DoctorId { get; set; }
-
         [Required]
         [StringLength(200)]
         public string MedicationName { get; set; }
@@ -30,7 +28,5 @@ namespace MedicalSystem.Core.Models
         [ForeignKey("PatientId")]
         public virtual Patient Patient { get; set; }
 
-        [ForeignKey("DoctorId")]
-        public virtual Doctor Doctor { get; set; }
     }
 }

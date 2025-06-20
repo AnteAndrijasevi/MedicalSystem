@@ -8,4 +8,28 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="src\components\common\" />
+    <None Remove="src\components\patients\" />
+    <None Remove="src\components\medical-history\" />
+    <None Remove="src\components\examinations\" />
+    <None Remove="src\components\prescriptions\" />
+    <None Remove="src\components\medical-images\" />
+    <None Remove="src\views\" />
+    <None Remove="src\services\" />
+    <None Remove="src\router\" />
+    <None Remove="src\store\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\components\common\" />
+    <Folder Include="src\components\patients\" />
+    <Folder Include="src\components\medical-history\" />
+    <Folder Include="src\components\examinations\" />
+    <Folder Include="src\components\prescriptions\" />
+    <Folder Include="src\components\medical-images\" />
+    <Folder Include="src\views\" />
+    <Folder Include="src\services\" />
+    <Folder Include="src\router\" />
+    <Folder Include="src\store\" />
+  </ItemGroup>
 </Project>

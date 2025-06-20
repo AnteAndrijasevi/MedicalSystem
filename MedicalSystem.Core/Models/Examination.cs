@@ -19,7 +19,6 @@ namespace MedicalSystem.Core.Models
 
         public int TypeId { get; set; }
 
-        public int? DoctorId { get; set; }
 
         [Required]
         public DateTime ExaminationDate { get; set; }
@@ -36,8 +35,6 @@ namespace MedicalSystem.Core.Models
         [ForeignKey("TypeId")]
         public virtual ExaminationType ExaminationType { get; set; }
 
-        [ForeignKey("DoctorId")]
-        public virtual Doctor Doctor { get; set; }
 
         public virtual ICollection<MedicalImage> MedicalImages { get; set; }
     }

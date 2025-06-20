@@ -1,0 +1,109 @@
+﻿@model MedicalSystem.API.DTOs.PatientDto
+
+@{
+    ViewData["Title"] = $"Obriši pacijenta - {Model.FirstName} {Model.LastName}";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-danger"><i class="bi bi-exclamation-triangle"></i> Obriši pacijenta</h2>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Povratak na listu
+    </a>
+</div>
+
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i> Upozorenje!</h4>
+    <p>Siguran jeste da želite obrisati ovog pacijenta? <strong>Ova radnja se ne može poništiti!</strong></p>
+    <hr>
+    <p class="mb-0">Svi povezani podaci (medicinska povijest, pregledi, recepti) će također biti obrisani.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5><i class="bi bi-person-x"></i> Podaci pacijenta koji će biti obrisan</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">ID pacijenta:</dt>
+                    <dd class="col-sm-9">@Model.PatientId</dd>
+
+                    <dt class="col-sm-3">Puno ime:</dt>
+                    <dd class="col-sm-9"><strong>@Model.FirstName @Model.LastName</strong></dd>
+
+                    <dt class="col-sm-3">OIB:</dt>
+                    <dd class="col-sm-9"><code>@Model.OIB</code></dd>
+
+                    <dt class="col-sm-3">Datum rođenja:</dt>
+                    <dd class="col-sm-9">@Model.DateOfBirth.ToString("dd.MM.yyyy")</dd>
+
+                    <dt class="col-sm-3">Godine:</dt>
+                    <dd class="col-sm-9">@((DateTime.Now.Year - Model.DateOfBirth.Year)) godina</dd>
+
+                    <dt class="col-sm-3">Spol:</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge bg-@(Model.Gender == "M" ? "primary" : Model.Gender == "F" ? "danger" : "secondary")">
+                            @(Model.Gender == "M" ? "Muški" : Model.Gender == "F" ? "Ženski" : "Ostalo")
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-3">Broj pacijenta:</dt>
+                    <dd class="col-sm-9">@Model.PatientNumber</dd>
+
+                    @if (!string.IsNullOrEmpty(Model.ContactNumber))
+                    {
+                        <dt class="col-sm-3">Kontakt broj:</dt>
+                        <dd class="col-sm-9"><i class="bi bi-telephone"></i> @Model.ContactNumber</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-warning">
+            <div class="card-header bg-warning">
+                <h6><i class="bi bi-exclamation-circle"></i> Što će biti obrisano?</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-person-x text-danger"></i> Osnovni podaci pacijenta</li>
+                    <li><i class="bi bi-clock-history text-danger"></i> Sva medicinska povijest</li>
+                    <li><i class="bi bi-clipboard-pulse text-danger"></i> Svi medicinski pregledi</li>
+                    <li><i class="bi bi-prescription2 text-danger"></i> Svi recepti</li>
+                    <li><i class="bi bi-image text-danger"></i> Sve medicinske slike</li>
+                </ul>
+
+                <div class="alert alert-warning mt-3">
+                    <small><i class="bi bi-info-circle"></i> <strong>Napomena:</strong> Ova radnja je nepovratna!</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="PatientId" />
+        <div class="d-flex justify-content-between">
+            <div>
+                <button type="submit" class="btn btn-danger btn-lg me-3"
+                        onclick="return confirm('Jeste li apsolutno sigurni da želite obrisati ovog pacijenta? Ova radnja se ne može poništiti!')">
+                    <i class="bi bi-trash3"></i> DA, obriši pacijenta
+                </button>
+            </div>
+            <div>
+                <a asp-action="Details" asp-route-id="@Model.PatientId" class="btn btn-info me-2">
+                    <i class="bi bi-eye"></i> Prikaži detalje
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.PatientId" class="btn btn-warning me-2">
+                    <i class="bi bi-pencil"></i> Uredi umjesto brisanja
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Odustani
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

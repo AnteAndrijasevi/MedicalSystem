@@ -1,0 +1,61 @@
+﻿.card {
+    transition: transform 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.table th {
+    font-weight: 600;
+    border-top: none;
+}
+
+.btn-group .btn {
+    margin-right: 2px;
+}
+
+    .btn-group .btn:last-child {
+        margin-right: 0;
+    }
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.alert {
+    border: none;
+    border-radius: 8px;
+}
+
+footer {
+    position: sticky;
+    top: 100vh;
+}
+
+.display-1 {
+    font-size: 4rem;
+}
+
+@media (max-width: 768px) {
+    .display-1 {
+        font-size: 2.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+        .btn-group .btn {
+            margin-bottom: 2px;
+            margin-right: 0;
+        }
+}

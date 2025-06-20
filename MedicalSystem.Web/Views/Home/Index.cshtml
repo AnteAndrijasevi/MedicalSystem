@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Početna stranica";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dobrodošli u Medicinski Sustav</h1>
+    <p class="lead">Sustav za upravljanje pacijentima i medicinskim podacima</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-people display-1 text-primary mb-3"></i>
+                <h5 class="card-title">Upravljanje Pacijentima</h5>
+                <p class="card-text">Dodavanje, pretraživanje i upravljanje podacima pacijenata</p>
+                <a asp-controller="Patients" asp-action="Index" class="btn btn-primary">
+                    <i class="bi bi-arrow-right"></i> Otvori
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-clipboard-pulse display-1 text-success mb-3"></i>
+                <h5 class="card-title">Medicinski Pregledi</h5>
+                <p class="card-text">Evidentiranje pregleda, tipova i medicinskih slika</p>
+                <a asp-controller="Examinations" asp-action="Index" class="btn btn-success">
+                    <i class="bi bi-arrow-right"></i> Otvori
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-prescription2 display-1 text-info mb-3"></i>
+                <h5 class="card-title">Recepti i Lijekovi</h5>
+                <p class="card-text">Upravljanje receptima i propisanim lijekovima</p>
+                <a asp-controller="Prescriptions" asp-action="Index" class="btn btn-info">
+                    <i class="bi bi-arrow-right"></i> Otvori
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-info-circle"></i> Značajke sustava</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle text-success"></i> Pretraživanje pacijenata po imenu i OIB-u</li>
+                            <li><i class="bi bi-check-circle text-success"></i> Evidencija medicinske povijesti</li>
+                            <li><i class="bi bi-check-circle text-success"></i> 13 tipova medicinskih pregleda</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle text-success"></i> Upload medicinskih slika</li>
+                            <li><i class="bi bi-check-circle text-success"></i> Export podataka u CSV format</li>
+                            <li><i class="bi bi-check-circle text-success"></i> Upravljanje receptima</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

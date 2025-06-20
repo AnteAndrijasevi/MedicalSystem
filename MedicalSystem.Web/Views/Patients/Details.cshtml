@@ -1,0 +1,116 @@
+﻿@model MedicalSystem.API.DTOs.PatientDto
+
+@{
+    ViewData["Title"] = $"Detalji - {Model.FirstName} {Model.LastName}";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-person-circle"></i> @Model.FirstName @Model.LastName</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.PatientId" class="btn btn-warning me-2">
+            <i class="bi bi-pencil"></i> Uredi
+        </a>
+        <a asp-action="Export" asp-route-id="@Model.PatientId" class="btn btn-success me-2">
+            <i class="bi bi-download"></i> CSV Export
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Povratak
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-person-badge"></i> Osnovni podaci</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">ID:</dt>
+                    <dd class="col-sm-8">@Model.PatientId</dd>
+
+                    <dt class="col-sm-4">Ime:</dt>
+                    <dd class="col-sm-8">@Model.FirstName</dd>
+
+                    <dt class="col-sm-4">Prezime:</dt>
+                    <dd class="col-sm-8">@Model.LastName</dd>
+
+                    <dt class="col-sm-4">OIB:</dt>
+                    <dd class="col-sm-8"><code>@Model.OIB</code></dd>
+
+                    <dt class="col-sm-4">Datum rođenja:</dt>
+                    <dd class="col-sm-8">@Model.DateOfBirth.ToString("dd.MM.yyyy")</dd>
+
+                    <dt class="col-sm-4">Godine:</dt>
+                    <dd class="col-sm-8">@((DateTime.Now.Year - Model.DateOfBirth.Year))</dd>
+
+                    <dt class="col-sm-4">Spol:</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge bg-@(Model.Gender == "M" ? "primary" : Model.Gender == "F" ? "danger" : "secondary")">
+                            @(Model.Gender == "M" ? "Muški" : Model.Gender == "F" ? "Ženski" : "Ostalo")
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4">Broj pacijenta:</dt>
+                    <dd class="col-sm-8">@Model.PatientNumber</dd>
+
+                    @if (!string.IsNullOrEmpty(Model.ContactNumber))
+                    {
+                        <dt class="col-sm-4">Kontakt:</dt>
+                        <dd class="col-sm-8"><i class="bi bi-telephone"></i> @Model.ContactNumber</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6><i class="bi bi-clock-history"></i> Medicinska povijest</h6>
+                        <button class="btn btn-sm btn-success">
+                            <i class="bi bi-plus"></i> Dodaj
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Učitavanje medicinske povijesti...</p>
+                        <!-- TODO: Load medical history via API -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6><i class="bi bi-clipboard-pulse"></i> Pregledi</h6>
+                        <button class="btn btn-sm btn-success">
+                            <i class="bi bi-plus"></i> Novi pregled
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Učitavanje pregleda...</p>
+                        <!-- TODO: Load examinations via API -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6><i class="bi bi-prescription2"></i> Recepti</h6>
+                        <button class="btn btn-sm btn-success">
+                            <i class="bi bi-plus"></i> Novi recept
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Učitavanje recepata...</p>
+                        <!-- TODO: Load prescriptions via API -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
